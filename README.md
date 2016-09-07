@@ -1,8 +1,8 @@
 # hubot-skype-bot
 
-A Hubot adapter for the official [Skype Bots API (Preview)][skypebots].
+A Hubot adapter for the official [Microsoft Bot Framework (Preview)][botframework].
 
-This adapter relies on **Skype NodeJS SDK**.
+This adapter relies on [**Bot Framework NodeJS SDK**][botframeworknodejs].
 
 Refer to Skype Bots [documentation][] for more information.
 
@@ -11,31 +11,35 @@ See [`src/skype.coffee`](src/skype.coffee) for full documentation.
 
 ## Getting Started
 
-You need 3 pieces of _credentials_ before getting started with `hubot-skype-bot`: a Skype bot ID, a Microsoft application ID, and a secret associated with the application ID.
+You need 2 pieces of _credentials_ before getting started with `hubot-skype-bot`: a Microsoft application ID, and a password associated with the application ID.
 
 ### 1. Create Skype Bot
 
-To obtain the Skype bot ID, start by [creating a new Skype bot][createbot] (https://developer.microsoft.com/en-us/skype/bots/manage/Create).
+To obtain a new bot, start by [registering a new one][createbot].
 
-Tick both _"Send and receive messages and content in 1:1 chat"_, and _"Send and receive messages and content in a group chat (limited preview for developer accounts only)"_.
-
-For the _"Messaging Webhook"_, set it to the URL that your bot will be hosted, and accessible from, followed by a `/skype/` path. For example, if you are using [`ngrok`][ngrok] to expose your locally hosted bot, you will be entering something like: `https://unique-id.ngrok.io/skype/`
+For the _"Messaging Endpoint"_, set it to the URL (HTTPS) that your bot will be hosted, and accessible from, followed by a `/skype/` path. For example, if you are using [`ngrok`][ngrok] to expose your locally hosted bot, you will be entering something like: `https://unique-id.ngrok.io/skype/`
 
 During the creation process, you will be asked for a _Microsoft Application ID_.
 
+After bot is created, in _Skype Channel_, click on _Edit_ and enable _Group messaging_.
+
+To start speaking with it click in the _Add to Skype_ button (in Linux, open [Skype Web](https://web.skype.com) before clicking the add button).
+
 ### 2. Create Microsoft Application
 
-There should be a link to the [Microsoft Application Registration Portal][appportal] (https://apps.dev.microsoft.com/). Once you create an application, you will be given an application ID, and a secret associated with the application ID.
+There should be a link to the [Create Microsoft App ID and password][appportal]. Once you create an application, you will be given an application ID, and a secret associated with the application ID.
 
 ### 3. Set Environment Variables
 
-You should now have the 3 aforementioned pieces of _credentials_. Expose them to your bot environment:
+You should now have the 2 aforementioned pieces of _credentials_. Expose them to your bot environment:
 
 ```bash
-export SKYPE_BOT_ID="BOT ID HERE"
 export MICROSOFT_APP_ID="APP ID HERE"
-export MICROSOFT_APP_SECRET="APP SECRET HERE"
+export MICROSOFT_APP_PASSWORD="APP PASSWORD HERE"
 ```
+
+One Hubot is running, click in _Test connection to your bot_ in [your bot page][botframeworkbots].
+This will send a POST to your endpoint that will be answered with a HTTP 100.
 
 
 ## Installation via NPM
@@ -55,13 +59,14 @@ Now, run Hubot with the `skype-bot` adapter:
 
 Variable | Default | Description
 --- | --- | ---
-`MICROSOFT_APP_ID` | N/A | Your bot's unique ID (https://developer.microsoft.com/en-us/skype/bots/manage)
-`MICROSOFT_APP_SECRET` | N/A | A Microsoft application ID to authenticate your bot (https://apps.dev.microsoft.com/)
-`SKYPE_BOT_ID` | N/A | A Microsoft application secret associated with your application ID (https://apps.dev.microsoft.com/)
+`MICROSOFT_APP_ID` | N/A | Your bot's unique ID (https://dev.botframework.com/bots)
+`MICROSOFT_APP_PASSWORD` | N/A | A Microsoft application ID to authenticate your bot (https://apps.dev.microsoft.com/)
 
 
-[skypebots]: https://developer.microsoft.com/skype/bots
-[documentation]: https://developer.microsoft.com/en-us/skype/bots/docs
-[createbot]: https://developer.microsoft.com/en-us/skype/bots/manage/Create
+[botframework]: https://dev.botframework.com/
+[botframeworkbots]: https://dev.botframework.com/bots
+[botframeworknodejs]: https://docs.botframework.com/en-us/node/builder/chat-reference/modules/_botbuilder_d_.html
+[documentation]: https://docs.botframework.com/en-us/skype/getting-started
+[createbot]: https://dev.botframework.com/bots/new
 [appportal]: https://apps.dev.microsoft.com/
 [ngrok]: https://ngrok.com/

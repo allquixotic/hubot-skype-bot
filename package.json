@@ -1,8 +1,11 @@
 {
   "name": "hubot-skype-bot",
-  "description": "A Hubot adapter for the official Skype Bots API (Preview).",
-  "version": "1.0.1",
+  "description": "A Hubot adapter for the official Microsoft Bot Framework (Preview).",
+  "version": "2.0.0",
   "author": "Ian Lai <os@fyianlai.com>",
+  "contributors": [
+    "Adrian Lopez <adrianlzt@gmail.com>"
+  ],
   "license": "MIT",
   "keywords": [
     "hubot",
@@ -21,7 +24,7 @@
     "url": "https://github.com/ClaudeBot/hubot-skype-bot/issues"
   },
   "dependencies": {
-    "skype-sdk": "https://devportalassets.azureedge.net/files/skype-sdk.tar.gz"
+    "botbuilder": "~3.2.2"
   },
   "peerDependencies": {},
   "main": "./src/skype.coffee",
