@@ -82,7 +82,7 @@ class Skype extends Adapter
         # The matches function needs a regexp for the first arguments, then an array of anonymous funcs
         # Those anonymous functions receive session param, which we could use to answer, store values, etc.
         # https://docs.botframework.com/en-us/node/builder/chat-reference/classes/_botbuilder_d_.session.html
-        @intents.matches /.*example$/i, [
+        @intents.matches /example$/i, [
           (session) =>
             session.send "This bot is a mixture between BotFramwork de Microsoft y Hubot.
 If you write 'example', this message is shown.\n\n
@@ -94,12 +94,12 @@ In group chats, bot only will receive messages send to it. Eg.: @botname example
 
         # This example intent has two anonymous funcs. First one start a dialog (botframework function) with the user.
         # Second one is executed after and receive the values written by the user
-        @intents.matches /.*chat$/i, [
+        @intents.matches /chat$/i, [
           (session) =>
-            session.beginDialog '/.*chat$/i'
+            session.beginDialog '/chat'
             return
           (session, results) =>
-            session.send "Dialog results #{results}"
+            console.log "Dialog results: #{results}"
             return
         ]
 
@@ -124,6 +124,7 @@ In group chats, bot only will receive messages send to it. Eg.: @botname example
           (session, results) ->
             # This is to remove <at...> from the response of a user in case of group chats
             resp = results.response.replace /.*<\/at>\s+(.*)$/, "$1"
+            session.send "You said: #{resp}"
 
             # We can use session.userData to store values
             # Eg.: session.userData.channel_name = resp
