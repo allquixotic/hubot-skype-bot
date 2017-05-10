@@ -47,7 +47,7 @@ class Skype extends Adapter
 
     # Pass the msg to Hubot, appending the bot name at the beggining
     _processMsg: (msg) ->
-        user = @_createUser msg.user.id, msg.address
+        user = @_createUser msg.user.name, msg.address
         # Remove <at id="28:...">name</at>. This is received by the bot when called from a group
         # Append robot name at the beggining
         text = @robot.name + " " + msg.text.replace /.*<\/at>\s+(.*)$/, "$1"
