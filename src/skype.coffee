@@ -71,7 +71,7 @@ class Skype extends Adapter
         @bot = new (builder.UniversalBot)(@connector)
 
         # HTTP POST to /skype/ are passed to botframework (by default port 8080)
-        @robot.router.post "/skype/", @connector.listen()
+        @robot.router.post "/skype", @connector.listen()
 
         # Anything received by the bot is parsed by the defined intents
         # If nothing is matched, pass the msg to Hubot
