@@ -49,7 +49,7 @@ class Skype extends Adapter
     _sendMsg: (address, text) =>
         @robot.logger.debug "Bot msg: #{text}"
         msg = new builder.Message()
-        msg.textFormat("plain") # By default is markdown
+        # msg.textFormat("plain") # By default is markdown
         msg.address(address)
         msg.text(text)
         @_addAttachements text,msg
