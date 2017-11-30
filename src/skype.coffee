@@ -1,4 +1,5 @@
 {Robot, Adapter, TextMessage} = require "hubot"
+getUrls = require "get-urls"
 builder = require "botbuilder"; # Microsoft botframework
 
 # Skype adaptator
@@ -23,12 +24,34 @@ class Skype extends Adapter
         @robot.logger.debug("hubot-skype-bot: new user : ", user)
         user
 
+    _addAttachements: (text, msg) ->
+      urls = getUrls(text)
+      mimes = 
+        'gif': 'image/gif'
+        'jpg': 'image/jpeg'
+        'jpeg': 'image/jpeg'
+      uarray = Array.from(urls)
+      console.log(uarray)
+      for idx of uarray
+        ext = uarray[idx].split('.').pop()
+        console.log(idx,ext)
+        mime = 'text/html'
+        if typeof mimes[ext] != 'undefined'
+          mime = mimes[ext]
+          console.log(mime)
+          msg.addAttachment
+            contentUrl: uarray[idx]
+            contentType: mime
+            name: uarray[idx]
+      return
+
     _sendMsg: (address, text) =>
         @robot.logger.debug "Bot msg: #{text}"
         msg = new builder.Message()
         msg.textFormat("plain") # By default is markdown
         msg.address(address)
         msg.text(text)
+        @_addAttachements text,msg
         @bot.send msg, (err) =>
                 if typeof err == 'undefined'
                     @robot.logger.error "Sending msg to Skype #{err}"
