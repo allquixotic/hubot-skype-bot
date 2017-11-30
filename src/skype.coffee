@@ -28,6 +28,7 @@ class Skype extends Adapter
       urls = getUrls(text)
       mimes = 
         'gif': 'image/gif'
+        'png': 'image/png'
         'jpg': 'image/jpeg'
         'jpeg': 'image/jpeg'
       uarray = Array.from(urls)
