@@ -1,10 +1,11 @@
 {
   "name": "hubot-skype-bot",
-  "description": "A Hubot adapter for the official Microsoft Bot Framework (Preview).",
-  "version": "2.0.0",
+  "description": "A Hubot adapter for the official Microsoft Bot Framework.",
+  "version": "2.0.1",
   "author": "Ian Lai <os@fyianlai.com>",
   "contributors": [
     "Adrian Lopez <adrianlzt@gmail.com>"
+  , "Sean McNamara <smcnam@gmail.com>"
   ],
   "license": "MIT",
   "keywords": [
@@ -18,13 +19,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/ClaudeBot/hubot-skype-bot.git"
+    "url": "git://github.com/allquixotic/hubot-skype-bot.git"
   },
   "bugs": {
-    "url": "https://github.com/ClaudeBot/hubot-skype-bot/issues"
+    "url": "https://github.com/allquixotic/hubot-skype-bot/issues"
   },
   "dependencies": {
-    "botbuilder": "~3.2.2"
+    "botbuilder": "~3.14.0"
   },
   "peerDependencies": {},
   "main": "./src/skype.coffee",
