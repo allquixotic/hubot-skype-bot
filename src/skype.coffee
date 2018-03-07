@@ -75,7 +75,7 @@ class Skype extends Adapter
         # Remove <at id="28:...">name</at>. This is received by the bot when called from a group
         # Append robot name at the beggining
         text = msg.text.replace /.*<\/at>\s+(.*)$/, "$1"
-		@robot.logger.debug "Text passed to hubot TextMessage: #{text}" 
+        @robot.logger.debug "Text passed to hubot TextMessage: #{text}" 
         message = new TextMessage user, text, msg.address.id
         # @receive pass the message to Hubot internals
         @receive(message) if message?
