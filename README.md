@@ -1,10 +1,10 @@
 # hubot-skype-bot
 
-A Hubot adapter for the official [Microsoft Bot Framework (Preview)][botframework].
+A Hubot adapter for Skype using the [Microsoft Bot Framework][https://dev.botframework.com/].
 
-This adapter relies on [**Bot Framework NodeJS SDK**][botframeworknodejs].
+This adapter relies on the [Bot Builder for NodeJS](https://www.npmjs.com/package/botbuilder).
 
-Refer to Skype Bots [documentation][] for more information.
+Refer to Skype Bots [documentation][https://developer.microsoft.com/en-us/skype/bots/docs] for more information.
 
 See [`src/skype.coffee`](src/skype.coffee) for full documentation.
 
