@@ -25,6 +25,7 @@
     "url": "https://github.com/allquixotic/hubot-skype-bot/issues"
   },
   "dependencies": {
+    "get-urls": "^7.0.0",
     "botbuilder": "~3.14.0"
   },
   "peerDependencies": {},

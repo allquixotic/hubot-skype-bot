@@ -1,4 +1,5 @@
 {Robot, Adapter, TextMessage} = require "hubot"
+getUrls = require "get-urls"
 builder = require "botbuilder"; # Microsoft botframework
 
 # Skype adaptator
@@ -23,12 +24,35 @@ class Skype extends Adapter
         @robot.logger.debug("hubot-skype-bot: new user : ", user)
         user
 
+    _addAttachements: (text, msg) ->
+      urls = getUrls(text)
+      mimes = 
+        'gif': 'image/gif'
+        'png': 'image/png'
+        'jpg': 'image/jpeg'
+        'jpeg': 'image/jpeg'
+      uarray = Array.from(urls)
+      console.log(uarray)
+      for idx of uarray
+        ext = uarray[idx].split('.').pop()
+        console.log(idx,ext)
+        mime = 'text/html'
+        if typeof mimes[ext] != 'undefined'
+          mime = mimes[ext]
+          console.log(mime)
+          msg.addAttachment
+            contentUrl: uarray[idx]
+            contentType: mime
+            name: uarray[idx]
+      return
+
     _sendMsg: (address, text) =>
         @robot.logger.debug "Bot msg: #{text}"
         msg = new builder.Message()
-        msg.textFormat("plain") # By default is markdown
+        # msg.textFormat("plain") # By default is markdown
         msg.address(address)
         msg.text(text)
+        @_addAttachements text,msg
         @bot.send msg, (err) =>
                 if typeof err == 'undefined'
                     @robot.logger.error "Sending msg to Skype #{err}"
@@ -47,7 +71,7 @@ class Skype extends Adapter
 
     # Pass the msg to Hubot, appending the bot name at the beggining
     _processMsg: (msg) ->
-        user = @_createUser msg.user.id, msg.address
+        user = @_createUser msg.user.name, msg.address
         # Remove <at id="28:...">name</at>. This is received by the bot when called from a group
         # Append robot name at the beggining
         text = @robot.name + " " + msg.text.replace /.*<\/at>\s+(.*)$/, "$1"
@@ -71,7 +95,7 @@ class Skype extends Adapter
         @bot = new (builder.UniversalBot)(@connector)
 
         # HTTP POST to /skype/ are passed to botframework (by default port 8080)
-        @robot.router.post "/skype/", @connector.listen()
+        @robot.router.post "/skype", @connector.listen()
 
         # Anything received by the bot is parsed by the defined intents
         # If nothing is matched, pass the msg to Hubot
